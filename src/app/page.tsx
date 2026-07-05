@@ -1,66 +1,104 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || 'Login failed');
+        setLoading(false);
+        return;
+      }
+
+      router.push('/dashboard');
+    } catch {
+      setError('Network error. Try again.');
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-logo" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+          <img src="/logo.png" alt="TeleExPro Icon" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
+          <div style={{ height: '48px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img src="/namelogo.png" alt="TeleExPro Text" style={{ height: '120px', objectFit: 'contain', marginTop: '-6px' }} />
+          </div>
+          <p style={{ marginTop: '-4px' }}>Outbound Sales Command Center</p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        {error && <div className="login-error">{error}</div>}
+
+        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="form-group">
+            <label className="form-label" htmlFor="username">Username</label>
+            <input
+              id="username"
+              className="input"
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              autoFocus
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="password">Password</label>
+            <input
+              id="password"
+              className="input"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="btn btn-primary btn-lg w-full"
+            disabled={loading}
+            style={{ marginTop: '8px' }}
           >
-            Documentation
-          </a>
-        </div>
-      </main>
+            {loading ? (
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="loader" style={{ width: '18px', height: '18px', margin: 0, borderWidth: '2px' }} />
+                Signing in...
+              </span>
+            ) : (
+              'Sign In'
+            )}
+          </button>
+        </form>
+
+        <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '12px', color: 'var(--text-muted)' }}>
+          © 2026 TeleExpro · All rights reserved
+        </p>
+      </div>
     </div>
   );
 }
