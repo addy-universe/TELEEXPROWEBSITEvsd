@@ -25,10 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderer = new THREE.WebGLRenderer({
         canvas: canvas,
         antialias: true,
-        alpha: false
+        alpha: false,
+        powerPreference: "high-performance",
+        precision: "mediump"
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
     // 4. Particles
     const particlesCount = 3000;
@@ -147,9 +149,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 8. Animation Loop (single authoritative function — no reassignment)
     const clock = new THREE.Clock();
+    let isCanvasVisible = true;
+
+    // Track scroll to pause render loop when off-screen
+    window.addEventListener('scroll', () => {
+        isCanvasVisible = window.scrollY < window.innerHeight * 1.8;
+    }, { passive: true });
 
     function animate() {
         requestAnimationFrame(animate);
+
+        // Optimization: Pause rendering if the WebGL background is scrolled out of view
+        if (!isCanvasVisible) {
+            return;
+        }
 
         const elapsedTime = clock.getElapsedTime();
 

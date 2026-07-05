@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initSmoothScroll();
     initScrollAnimations();
     initNavbarScrolled();
     initShutterText();
@@ -191,6 +192,64 @@ function handleNewsletterSubmit(e) {
         success.style.display = 'none';
         form.reset();
     }, 6000);
+}
+
+/* =========================================================================
+   Smooth Scroll Initialization (Lenis + GSAP sync)
+   ========================================================================= */
+function initSmoothScroll() {
+    if (typeof Lenis === 'undefined') {
+        setTimeout(initSmoothScroll, 50);
+        return;
+    }
+
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.2,
+        infinite: false,
+    });
+
+    // Sync Lenis scroll updates with GSAP ScrollTrigger
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
+        
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        
+        gsap.ticker.lagSmoothing(0);
+    } else {
+        // Fallback animation frame loop
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+    }
+
+    // Connect page anchor links to Lenis scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (!targetId || targetId === '#') return;
+
+            e.preventDefault();
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                lenis.scrollTo(targetEl, {
+                    offset: -80, // Offset for navbar height
+                    duration: 1.2
+                });
+            }
+        });
+    });
+
+    window.lenis = lenis;
 }
 
 /* End of main.js */
