@@ -356,7 +356,7 @@
                             <p>Fill out the form below and your message will be sent directly to our team.</p>
                         </div>
 
-                        <form class="query-form" id="employeeQueryForm" action="https://formsubmit.co/hr@teleexpro.in" method="POST">
+                        <form class="query-form" id="employeeQueryForm" action="https://formsubmit.co/teleexpro@gmail.com" method="POST">
                             <!-- FormSubmit Configuration -->
                             <input type="hidden" name="_subject" value="New Employee Query — TeleExPro Careers">
                             <input type="hidden" name="_captcha" value="false">
@@ -433,7 +433,7 @@
                         <p>Fill out the form below. Our HR team will review your application and get in touch within 48 hours if you match our requirements.</p>
                     </div>
 
-                    <form class="apply-form" action="https://formsubmit.co/hr@teleexpro.in" method="POST" enctype="multipart/form-data" id="jobAppForm">
+                    <form class="apply-form" action="https://formsubmit.co/teleexpro@gmail.com" method="POST" enctype="multipart/form-data" id="jobAppForm">
                         <!-- FormSubmit Configuration -->
                         <input type="hidden" name="_subject" value="New Job Application — TeleExPro Careers">
                         <input type="hidden" name="_captcha" value="false">
@@ -444,34 +444,40 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullName">Full Name *</label>
-                                <input type="text" id="fullName" name="Full Name" required placeholder="John Doe">
+                                <input type="text" id="fullName" name="Name" required placeholder="John Doe">
                             </div>
                             <div class="form-group">
-                                <label for="emailAddr">Email Address *</label>
-                                <input type="email" id="emailAddr" name="Email" required placeholder="johndoe@example.com">
+                                <label for="phoneNumber">Mobile Number *</label>
+                                <input type="tel" id="phoneNumber" name="Mobile" required placeholder="+91 98765 43210">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="phoneNumber">Phone Number *</label>
-                                <input type="tel" id="phoneNumber" name="Phone" required placeholder="+91 98765 43210">
+                                <label for="targetPosition">Role *</label>
+                                <select id="targetPosition" name="Role" required>
+                                    <option value="" disabled selected>Select a role...</option>
+                                    <option value="Customer Support">Customer Support</option>
+                                    <option value="Team Leader">Team Leader</option>
+                                    <option value="Other">Other</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="targetPosition">Target Position *</label>
-                                <select id="targetPosition" name="Position" required>
-                                    <option value="" disabled selected>Select a position...</option>
-                                    <option value="Sales Executive">Telecalling & Sales Executive</option>
-                                    <option value="Customer Support">Customer Support Representative</option>
-                                    <option value="Team Leader">Team Leader — Sales Operations</option>
-                                    <option value="Other">Other / General Operations</option>
+                                <label for="experienceLevel">Experience *</label>
+                                <select id="experienceLevel" name="Experience" required>
+                                    <option value="" disabled selected>Select experience...</option>
+                                    <option value="Fresher (0 years)">Fresher</option>
+                                    <option value="1-2 Years">1-2 Years</option>
+                                    <option value="3-5 Years">3-5 Years</option>
+                                    <option value="5+ Years">5+ Years</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="coverLetter">Brief Professional Summary</label>
-                            <textarea id="coverLetter" name="Summary" rows="4" placeholder="Tell us about your background, experience, or why you want to join TeleExPro..."></textarea>
+                        <div class="form-group file-upload-group">
+                            <label for="resumeUpload">Upload Resume (Max 5MB) *</label>
+                            <input type="file" id="resumeUpload" name="attachment" accept=".pdf,.doc,.docx" required class="file-input">
+                            <small class="file-help-text">Allowed formats: PDF, DOC, DOCX. Max file size: 5MB.</small>
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100 glow-btn" id="submitAppBtn">Submit Application</button>

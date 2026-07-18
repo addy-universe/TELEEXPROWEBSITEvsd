@@ -252,4 +252,22 @@ function initSmoothScroll() {
     window.lenis = lenis;
 }
 
+/* =========================================================================
+   File Upload Validation (Careers Page)
+   ========================================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const resumeInput = document.getElementById('resumeUpload');
+    if (resumeInput) {
+        resumeInput.addEventListener('change', function() {
+            const file = this.files[0];
+            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+            
+            if (file && file.size > maxSize) {
+                alert('File is too large. The maximum allowed file size is 5 MB.');
+                this.value = ''; // clear the input
+            }
+        });
+    }
+});
+
 /* End of main.js */

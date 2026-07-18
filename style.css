@@ -2682,3 +2682,44 @@ details[open] .faq-question::after {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================================
+   File Upload Styling
+   ========================================= */
+.file-upload-group {
+    margin-bottom: 1.5rem;
+}
+
+.file-input {
+    width: 100%;
+    padding: 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--clr-text-main);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-input:hover,
+.file-input:focus {
+    border-color: var(--clr-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.file-input::file-selector-button {
+    background: var(--clr-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    color: var(--clr-text-main);
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: background 0.2s;
+}
+
+.file-input::file-selector-button:hover {
+    background: var(--clr-primary);
+    color: white;
+}
