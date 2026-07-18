@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /about.html
+Allow: /careers.html
+Allow: /services.html
+Allow: /contact.html
 
+Disallow: /node_modules/
+Disallow: /*.js$
+Disallow: /generate_*
+Disallow: /format_logos.js
+
+# Sitemap
 Sitemap: https://teleexpro.in/sitemap.xml
+
+# Host
+Host: https://teleexpro.in
