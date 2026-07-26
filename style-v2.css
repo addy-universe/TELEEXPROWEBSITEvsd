@@ -468,17 +468,22 @@ h4 {
 }
 
 .nav-links a {
-    /* Default: white text on dark hero background */
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    font-weight: 500;
+    color: #0D1B2A !important;
+    font-size: 0.95rem;
+    font-weight: 600;
     transition: color 0.3s;
     position: relative;
 }
 
-/* When navbar has scrolled (white bg), switch to dark text */
-.navbar.scrolled .nav-links a {
-    color: var(--clr-text-main);
+/* On Homepage hero before scroll: white text over dark video background */
+.home-page .navbar:not(.scrolled) .nav-links a {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* When navbar has scrolled OR on any subpage: crisp dark navy text */
+.navbar.scrolled .nav-links a,
+body:not(.home-page) .nav-links a {
+    color: #0D1B2A !important;
 }
 
 .nav-links a:not(.nav-cta):hover {

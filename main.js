@@ -101,9 +101,12 @@ function initShutterText() {
    ========================================================================= */
 function initNavbarScrolled() {
     const navbar = document.querySelector('.navbar');
+    if (navbar && !document.body.classList.contains('home-page')) {
+        navbar.classList.add('scrolled');
+    }
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        if (window.scrollY > 50 || !document.body.classList.contains('home-page')) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');

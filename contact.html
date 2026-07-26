@@ -39,21 +39,14 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@700;800&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=1.0.3">
+    <link rel="stylesheet" href="style.css?v=1.0.7">
 </head>
 
 <body>
 
-    <!-- Video Background -->
-    <div class="canvas-container" id="video-container">
-        <div class="canvas-overlay"></div>
-        <video id="hero-video" class="hero-video" autoplay loop muted playsinline>
-            <source src="hero_background.mp4" type="video/mp4">
-        </video>
-    </div>
 
-    <!-- 3D Interactive Background -->
-    <canvas class="webgl-canvas" id="webglCanvas"></canvas>
+
+
 
     <main class="content-wrapper">
 
@@ -68,6 +61,7 @@
                     <a href="about.html">About</a>
                     <a href="careers.html">Careers</a>
                     <a href="services.html">Services</a>
+                    <a href="blog.html">Blog</a>
                     <a href="contact.html" class="active">Contact Us</a>
                 </div>
                 <button class="mobile-menu-btn" aria-label="Toggle Menu">
@@ -199,6 +193,7 @@
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="careers.html">Careers</a></li>
                     <li><a href="services.html">Services</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
@@ -234,8 +229,7 @@
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Custom Scripts -->
-    <script src="three_scene.js"></script>
+
     <script src="main.js"></script>
 
     <!-- Form Script -->
