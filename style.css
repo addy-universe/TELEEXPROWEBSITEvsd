@@ -359,25 +359,27 @@ body:not(.home-page) .navbar {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
-body:not(.home-page) .nav-links a,
-body:not(.home-page) .navbar .nav-links a {
-    color: #0D1B2A !important;
-    font-weight: 600 !important;
-}
+@media (min-width: 769px) {
+    body:not(.home-page) .nav-links a,
+    body:not(.home-page) .navbar .nav-links a {
+        color: #0D1B2A !important;
+        font-weight: 600 !important;
+    }
 
-body:not(.home-page) .nav-links a:hover,
-body:not(.home-page) .navbar .nav-links a:hover {
-    color: #007BFF !important;
-}
+    body:not(.home-page) .nav-links a:hover,
+    body:not(.home-page) .navbar .nav-links a:hover {
+        color: #007BFF !important;
+    }
 
-body:not(.home-page) .nav-links a.active,
-body:not(.home-page) .navbar .nav-links a.active {
-    color: #007BFF !important;
-    font-weight: 700 !important;
-}
+    body:not(.home-page) .nav-links a.active,
+    body:not(.home-page) .navbar .nav-links a.active {
+        color: #007BFF !important;
+        font-weight: 700 !important;
+    }
 
-body:not(.home-page) .mobile-menu-btn span {
-    background-color: #0D1B2A !important;
+    body:not(.home-page) .mobile-menu-btn span {
+        background-color: #0D1B2A !important;
+    }
 }
 
 .navbar.scrolled {
@@ -2489,7 +2491,7 @@ details[open] .faq-question::after {
         flex-direction: column;
         gap: 5px;
         padding: 6px;
-        z-index: 200;
+        z-index: 10000 !important;
         position: relative;
     }
 
@@ -2499,7 +2501,7 @@ details[open] .faq-question::after {
         height: 2.5px;
         background-color: #0D1B2A !important;
         border-radius: 2px;
-        transition: transform 0.35s ease, opacity 0.25s ease;
+        transition: transform 0.35s ease, opacity 0.25s ease, background-color 0.25s ease;
         transform-origin: center;
     }
 
@@ -2513,47 +2515,52 @@ details[open] .faq-question::after {
         border-bottom: 1px solid rgba(0, 123, 255, 0.15) !important;
         padding: 0.85rem 0 !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+        z-index: 9998 !important;
     }
 
     /* On home-page non-scrolled hero mobile, keep top bar crisp & logo readable */
     .home-page .navbar:not(.scrolled) {
-        background: rgba(3, 10, 20, 0.95) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        border-bottom: 1px solid rgba(0, 123, 255, 0.15) !important;
     }
 
     .home-page .navbar:not(.scrolled) .mobile-menu-btn span {
-        background-color: #FFFFFF !important;
+        background-color: #0D1B2A !important;
     }
 
-    /* Slide-down full-width mobile nav drawer with solid 100% background */
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.4rem;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100dvh;
+    /* Slide-down full-width mobile nav drawer with 100% solid background */
+    .nav-links,
+    .home-page .nav-links,
+    body:not(.home-page) .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100dvh !important;
         background: #FFFFFF !important;
-        justify-content: flex-start;
-        padding-top: 5.5rem;
-        padding-bottom: 2rem;
-        z-index: 150;
-        overflow-y: auto;
+        justify-content: flex-start !important;
+        padding-top: 6rem !important;
+        padding-bottom: 2rem !important;
+        z-index: 9999 !important;
+        overflow-y: auto !important;
         /* Hidden by default */
         opacity: 0;
         pointer-events: none;
         transform: translateY(-100%);
         transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
     }
 
-    .nav-links.nav-open {
-        opacity: 1;
-        pointer-events: all;
-        transform: translateY(0);
+    .nav-links.nav-open,
+    .home-page .nav-links.nav-open,
+    body:not(.home-page) .nav-links.nav-open {
+        opacity: 1 !important;
+        pointer-events: all !important;
+        transform: translateY(0) !important;
     }
 
     /* Extremely high contrast menu item links */
@@ -2564,16 +2571,16 @@ details[open] .faq-question::after {
     body:not(.home-page) .navbar .nav-links a,
     .navbar.scrolled .nav-links a {
         color: #0D1B2A !important;
-        font-size: 1.15rem !important;
+        font-size: 1.25rem !important;
         font-weight: 600 !important;
-        padding: 0.9rem 1.5rem !important;
+        padding: 0.95rem 1.5rem !important;
         width: 88% !important;
-        max-width: 360px;
+        max-width: 360px !important;
         text-align: center !important;
-        border-radius: 8px;
-        border-bottom: 1px solid #F1F5F9 !important;
+        border-radius: 8px !important;
+        border-bottom: 1px solid #E2E8F0 !important;
         transition: all 0.2s ease !important;
-        background: transparent;
+        background: transparent !important;
     }
 
     .nav-links a:hover,
@@ -2594,7 +2601,8 @@ details[open] .faq-question::after {
     }
 
     .nav-links .nav-cta,
-    body:not(.home-page) .nav-links .nav-cta {
+    body:not(.home-page) .nav-links .nav-cta,
+    .home-page .nav-links .nav-cta {
         margin-top: 1.25rem !important;
         background: #007BFF !important;
         color: #FFFFFF !important;
@@ -2603,7 +2611,7 @@ details[open] .faq-question::after {
         border-radius: 8px !important;
         padding: 0.85rem 2rem !important;
         width: 85% !important;
-        max-width: 320px;
+        max-width: 320px !important;
         text-align: center !important;
         box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3) !important;
     }
