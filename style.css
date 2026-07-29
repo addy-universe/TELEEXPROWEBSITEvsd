@@ -506,20 +506,22 @@ body:not(.home-page) .mobile-menu-btn span {
     position: relative;
 }
 
-/* On Homepage hero before scroll: white text over dark video background */
-.home-page .navbar:not(.scrolled) .nav-links a {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
+/* On Desktop Homepage hero before scroll: white text over dark video background */
+@media (min-width: 769px) {
+    .home-page .navbar:not(.scrolled) .nav-links a {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
 
-.home-page .navbar:not(.scrolled) .nav-links a.active {
-    color: #007BFF !important;
-    font-weight: 700;
-}
+    .home-page .navbar:not(.scrolled) .nav-links a.active {
+        color: #007BFF !important;
+        font-weight: 700;
+    }
 
-/* When navbar has scrolled OR on any subpage: crisp dark navy text */
-.navbar.scrolled .nav-links a,
-body:not(.home-page) .nav-links a {
-    color: #0D1B2A !important;
+    /* When navbar has scrolled OR on any subpage: crisp dark navy text */
+    .navbar.scrolled .nav-links a,
+    body:not(.home-page) .nav-links a {
+        color: #0D1B2A !important;
+    }
 }
 
 .nav-links a:not(.nav-cta):hover,
@@ -2478,32 +2480,74 @@ details[open] .faq-question::after {
 /* ── Tablet / Large Mobile ─────────────────────────────── */
 @media (max-width: 768px) {
 
-    /* Show hamburger, hide desktop links */
+    /* Show hamburger button with high-contrast bars */
     .mobile-menu-btn {
-        display: flex;
+        display: flex !important;
+        background: none;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+        padding: 6px;
+        z-index: 200;
+        position: relative;
     }
 
-    /* Slide-down full-width mobile nav */
+    .mobile-menu-btn span {
+        display: block;
+        width: 26px;
+        height: 2.5px;
+        background-color: #0D1B2A !important;
+        border-radius: 2px;
+        transition: transform 0.35s ease, opacity 0.25s ease;
+        transform-origin: center;
+    }
+
+    /* Solid crisp header bar on mobile */
+    .navbar,
+    body:not(.home-page) .navbar,
+    .navbar.scrolled {
+        background: #FFFFFF !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid rgba(0, 123, 255, 0.15) !important;
+        padding: 0.85rem 0 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* On home-page non-scrolled hero mobile, keep top bar crisp & logo readable */
+    .home-page .navbar:not(.scrolled) {
+        background: rgba(3, 10, 20, 0.95) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .home-page .navbar:not(.scrolled) .mobile-menu-btn span {
+        background-color: #FFFFFF !important;
+    }
+
+    /* Slide-down full-width mobile nav drawer with solid 100% background */
     .nav-links {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0;
+        gap: 0.4rem;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100dvh;
-        background: rgba(13, 27, 42, 0.97);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        justify-content: center;
+        background: #FFFFFF !important;
+        justify-content: flex-start;
+        padding-top: 5.5rem;
+        padding-bottom: 2rem;
         z-index: 150;
+        overflow-y: auto;
         /* Hidden by default */
         opacity: 0;
         pointer-events: none;
-        transform: translateY(-10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: translateY(-100%);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     }
 
     .nav-links.nav-open {
@@ -2512,26 +2556,65 @@ details[open] .faq-question::after {
         transform: translateY(0);
     }
 
-    .nav-links a {
-        color: #FFFFFF;
-        font-size: 1.35rem;
-        font-weight: 600;
-        padding: 1rem 2rem;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    /* Extremely high contrast menu item links */
+    .nav-links a,
+    .home-page .navbar .nav-links a,
+    .home-page .navbar:not(.scrolled) .nav-links a,
+    body:not(.home-page) .nav-links a,
+    body:not(.home-page) .navbar .nav-links a,
+    .navbar.scrolled .nav-links a {
+        color: #0D1B2A !important;
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
+        padding: 0.9rem 1.5rem !important;
+        width: 88% !important;
+        max-width: 360px;
+        text-align: center !important;
+        border-radius: 8px;
+        border-bottom: 1px solid #F1F5F9 !important;
+        transition: all 0.2s ease !important;
+        background: transparent;
     }
 
-    .nav-links a:last-child {
-        border-bottom: none;
+    .nav-links a:hover,
+    .nav-links a:focus {
+        background: rgba(0, 123, 255, 0.06) !important;
+        color: #007BFF !important;
     }
 
-    .nav-links .nav-cta {
-        margin-top: 1rem;
-        border: 1px solid var(--clr-primary);
-        border-radius: 4px;
-        color: var(--clr-primary) !important;
-        width: auto;
+    .nav-links a.active,
+    .home-page .navbar .nav-links a.active,
+    .home-page .navbar:not(.scrolled) .nav-links a.active,
+    body:not(.home-page) .nav-links a.active,
+    .navbar.scrolled .nav-links a.active {
+        color: #007BFF !important;
+        font-weight: 700 !important;
+        background: rgba(0, 123, 255, 0.08) !important;
+        border-left: 4px solid #007BFF !important;
+    }
+
+    .nav-links .nav-cta,
+    body:not(.home-page) .nav-links .nav-cta {
+        margin-top: 1.25rem !important;
+        background: #007BFF !important;
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 0.85rem 2rem !important;
+        width: 85% !important;
+        max-width: 320px;
+        text-align: center !important;
+        box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3) !important;
+    }
+
+    .nav-links .nav-cta:hover {
+        background: #0056b3 !important;
+        color: #FFFFFF !important;
+    }
+
+    .mobile-menu-btn.is-open span {
+        background-color: #0D1B2A !important;
     }
 
     /* Mobile hero: push content to bottom-center */
